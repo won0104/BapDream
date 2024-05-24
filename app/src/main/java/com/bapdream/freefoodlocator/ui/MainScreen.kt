@@ -77,7 +77,7 @@ fun MainScreen() {
             }
             Spacer(modifier = Modifier.height(20.dp))
             Row {
-                // 근처 급식소 목록보기
+                // 급식소까지 길 찾기
                 val directionsTitle = buildAnnotatedString {
                     append(" 급식소까지\n")
                     withStyle(style = SpanStyle(color = textColor)) {
