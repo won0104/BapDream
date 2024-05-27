@@ -115,8 +115,8 @@ fun TopIconBox(title: AnnotatedString, @DrawableRes iconResId: Int, iconDescript
             .shadow(5.dp, RoundedCornerShape(20.dp)), // 여기서 그림자를 적용
         colors = CardDefaults.cardColors(Color.White),
         shape = RoundedCornerShape(20.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp), // elevation은 Dp 단위로 설정
-    ) {
+        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp), // elevation은 Dp 단위로 설정
+    ){
         Column(
             modifier = Modifier
                 .fillMaxHeight()
