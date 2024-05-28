@@ -3,6 +3,7 @@ package com.bapdream.freefoodlocator.ui
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,9 +36,13 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun MainScreen() {
+fun MainScreen(navController: NavHostController) {
+
+
     val textColor = Color(0xFFF04438)
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
         Image(
@@ -59,7 +64,8 @@ fun MainScreen() {
                 BottomIconBox(
                     title = locatorTitle,
                     iconResId = R.drawable.locator_icon,
-                    iconDescription = "지도 찾기 아이콘"
+                    iconDescription = "지도 찾기 아이콘",
+                    onClick = { navController.navigate("Locator") }
                 )
                 Spacer(modifier = Modifier.width(20.dp))
                 // 급식소 즐겨찾기
@@ -72,7 +78,8 @@ fun MainScreen() {
                 BottomIconBox(
                     title = likesTitle,
                     iconResId = R.drawable.heart_icon,
-                    iconDescription = "즐겨찾기 리스트 아이콘"
+                    iconDescription = "즐겨찾기 리스트 아이콘",
+                    onClick = { navController.navigate("Like") }
                 )
             }
             Spacer(modifier = Modifier.height(20.dp))
@@ -93,9 +100,17 @@ fun MainScreen() {
                     append("\n찾아보기")
                 }
 
-                TopIconBox(directionsTitle, R.drawable.direction_icon, "길찾기 아이콘")
+                TopIconBox(
+                    directionsTitle,
+                    R.drawable.direction_icon,
+                    "길찾기 아이콘",
+                    onClick = { navController.navigate("Direction") })
                 Spacer(modifier = Modifier.width(20.dp))
-                TopIconBox(policyTitle, R.drawable.policy_icon, "다른 정책 찾기 아이콘")
+                TopIconBox(
+                    policyTitle,
+                    R.drawable.policy_icon,
+                    "다른 정책 찾기 아이콘",
+                    onClick = { navController.navigate("FindPolicy") })
             }
         }
         Box(
@@ -108,15 +123,21 @@ fun MainScreen() {
 }
 
 @Composable
-fun TopIconBox(title: AnnotatedString, @DrawableRes iconResId: Int, iconDescription: String) {
+fun TopIconBox(
+    title: AnnotatedString,
+    @DrawableRes iconResId: Int,
+    iconDescription: String,
+    onClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .size(170.dp, 230.dp)
-            .shadow(5.dp, RoundedCornerShape(20.dp)), // 여기서 그림자를 적용
+            .shadow(5.dp, RoundedCornerShape(20.dp)) // 여기서 그림자를 적용
+            .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(Color.White),
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp), // elevation은 Dp 단위로 설정
-    ){
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxHeight()
@@ -141,15 +162,21 @@ fun TopIconBox(title: AnnotatedString, @DrawableRes iconResId: Int, iconDescript
 }
 
 @Composable
-fun BottomIconBox(title: AnnotatedString, @DrawableRes iconResId: Int, iconDescription: String) {
+fun BottomIconBox(
+    title: AnnotatedString,
+    @DrawableRes iconResId: Int,
+    iconDescription: String,
+    onClick: () -> Unit
+) {
     Card(
         modifier = Modifier
             .size(170.dp, 230.dp)
-            .shadow(5.dp, RoundedCornerShape(20.dp)), // 여기서 그림자를 적용
+            .shadow(5.dp, RoundedCornerShape(20.dp)) // 여기서 그림자를 적용
+            .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(Color.White),
         shape = RoundedCornerShape(20.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 3.dp), // elevation은 Dp 단위로 설정
-    ){
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxHeight()
@@ -177,8 +204,9 @@ fun BottomIconBox(title: AnnotatedString, @DrawableRes iconResId: Int, iconDescr
 @Preview(showBackground = true)
 fun PreviewMainScreen() {
     BapDreamTheme {
+        val navController = rememberNavController()
         Box(modifier = Modifier.background(Color(0xFFEED9DF))) {
-            MainScreen()
+            MainScreen(navController)
         }
     }
 }

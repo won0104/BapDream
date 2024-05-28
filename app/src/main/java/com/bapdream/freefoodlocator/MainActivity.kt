@@ -20,6 +20,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
+import com.bapdream.freefoodlocator.nav.MainNavHost
 import com.bapdream.freefoodlocator.ui.theme.BapDreamTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,12 +30,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BapDreamTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                val navController = rememberNavController()
+                MainNavHost(navController)
             }
         }
     }
@@ -41,7 +39,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column (Modifier.fillMaxSize().background(Color.LightGray)){
+    Column (
+        Modifier
+            .fillMaxSize()
+            .background(Color.LightGray)){
         Card(
             Modifier
                 .size(100.dp, 100.dp),
