@@ -1,63 +1,80 @@
 package com.bapdream.freefoodlocator
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
+import com.bapdream.freefoodlocator.nav.BottomNavigationBar
 import com.bapdream.freefoodlocator.nav.MainNavHost
 import com.bapdream.freefoodlocator.ui.theme.BapDreamTheme
 
 class MainActivity : ComponentActivity() {
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             BapDreamTheme {
-                val navController = rememberNavController()
-                MainNavHost(navController)
+                val mainNavController = rememberNavController()
+
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    bottomBar = {
+                        BottomNavigationBar(mainNavController) // 같은 NavController 사용
+                    }
+                ) {
+                    Box(modifier = Modifier.fillMaxSize()) { // Box를 추가하여 내부에 패딩을 조절합니다.
+                        MainNavHost(
+                            navController = mainNavController,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(bottom = 70.dp) // BottomNavigationBar의 높이에 맞추어 패딩 설정
+                        )
+                    }
+                }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Column (
-        Modifier
-            .fillMaxSize()
-            .background(Color.LightGray)){
-        Card(
-            Modifier
-                .size(100.dp, 100.dp),
-                //.clip(RoundedCornerShape(10.dp)),
-            elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
-        ) {
-            Text(text = "jojojojojojo")
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BapDreamTheme {
-        Greeting("Android")
-    }
-}
+//@Composable
+//@Preview(showBackground = true)
+//fun PreviewMainScreen() {
+//    BapDreamTheme {
+//        val mainNavController = rememberNavController()
+//        val bottomNavController = rememberNavController()
+//
+//        Scaffold(
+//            modifier = Modifier.fillMaxSize(),
+//            bottomBar = {
+//                BottomNavigationBar(bottomNavController)
+//            }
+//        ) {
+//            Box(modifier = Modifier.fillMaxSize()) { // Box를 추가하여 내부에 패딩을 조절합니다.
+//                MainNavHost(
+//                    navController = mainNavController,
+//                    modifier = Modifier
+//                        .fillMaxSize()
+//                        .padding(bottom = 56.dp) // BottomNavigationBar의 높이에 맞추어 패딩 설정
+//                )
+//            }
+//        }
+//    }
+//}

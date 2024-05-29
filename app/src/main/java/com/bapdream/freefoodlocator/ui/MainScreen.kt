@@ -41,14 +41,11 @@ import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun MainScreen(navController: NavHostController) {
-
-
     val textColor = Color(0xFFF04438)
-    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.SpaceBetween) {
+    Column(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier
-                .padding(0.dp, 0.dp)
-                .size(450.dp, 270.dp),
+                .size(460.dp, 270.dp),
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "밥드림 메인 로고"
         )
@@ -112,13 +109,8 @@ fun MainScreen(navController: NavHostController) {
                     "다른 정책 찾기 아이콘",
                     onClick = { navController.navigate("FindPolicy") })
             }
+
         }
-        Box(
-            Modifier
-                .height(70.dp)
-                .fillMaxWidth()
-                .background(Color.White)
-        )
     }
 }
 
@@ -131,7 +123,7 @@ fun TopIconBox(
 ) {
     Card(
         modifier = Modifier
-            .size(170.dp, 230.dp)
+            .size(170.dp, 220.dp)
             .shadow(5.dp, RoundedCornerShape(20.dp)) // 여기서 그림자를 적용
             .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(Color.White),
@@ -170,7 +162,7 @@ fun BottomIconBox(
 ) {
     Card(
         modifier = Modifier
-            .size(170.dp, 230.dp)
+            .size(170.dp, 220.dp)
             .shadow(5.dp, RoundedCornerShape(20.dp)) // 여기서 그림자를 적용
             .clickable(onClick = onClick),
         colors = CardDefaults.cardColors(Color.White),

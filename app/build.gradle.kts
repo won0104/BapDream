@@ -70,4 +70,6 @@ dependencies {
     implementation("androidx.compose.material3:material3:$1.2.1")
     // navigation
     implementation ("androidx.navigation:navigation-compose:2.7.7")
+
+    implementation ("androidx.compose.material:material:1.4.2")
 }
