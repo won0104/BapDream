@@ -44,28 +44,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-//@Composable
-//@Preview(showBackground = true)
-//fun PreviewMainScreen() {
-//    BapDreamTheme {
-//        val mainNavController = rememberNavController()
-//        val bottomNavController = rememberNavController()
-//
-//        Scaffold(
-//            modifier = Modifier.fillMaxSize(),
-//            bottomBar = {
-//                BottomNavigationBar(bottomNavController)
-//            }
-//        ) {
-//            Box(modifier = Modifier.fillMaxSize()) { // Box를 추가하여 내부에 패딩을 조절합니다.
-//                MainNavHost(
-//                    navController = mainNavController,
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .padding(bottom = 56.dp) // BottomNavigationBar의 높이에 맞추어 패딩 설정
-//                )
-//            }
-//        }
-//    }
-//}
